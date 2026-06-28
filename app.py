@@ -70,8 +70,25 @@ if df is not None:
     # Preprocessing and Training Models
     # Let's write helper encoders to transform categoricals safely
     encoders = {}
-    categorical_cols = ['policy_type', 'vehicle_type', 'accident_type', 'accident_severity', 'police_report_available']
-    
+    categorical_cols = [
+    'policy_state',
+    'policy_csl',
+    'insured_sex',
+    'insured_education_level',
+    'insured_occupation',
+    'insured_hobbies',
+    'insured_relationship',
+    'incident_type',
+    'collision_type',
+    'incident_severity',
+    'authorities_contacted',
+    'incident_state',
+    'incident_city',
+    'property_damage',
+    'police_report_available',
+    'auto_make',
+    'auto_model'
+]
     # Make a copy for training
     train_df = df.copy()
     
@@ -86,7 +103,14 @@ if df is not None:
 
     # 1. Claim Prediction Model (Target: claim_made)
     # Features: age, months_as_customer, policy_type, policy_annual_premium, previous_claims, vehicle_type, vehicle_age
-    features_claim = ['age', 'months_as_customer', 'policy_type', 'policy_annual_premium', 'previous_claims', 'vehicle_type', 'vehicle_age']
+    features_claim = [
+'age',
+'months_as_customer',
+'policy_annual_premium',
+'policy_deductable',
+'capital-gains',
+'capital-loss'
+]
     X_claim = train_df[features_claim]
     y_claim = train_df['claim_made']
     
@@ -97,7 +121,15 @@ if df is not None:
 
     # 2. Fraud Detection Model (Target: fraud_reported)
     # Features: total_claim_amount, previous_claims, accident_type, accident_severity, number_of_vehicles_involved, witnesses, police_report_available
-    features_fraud = ['total_claim_amount', 'previous_claims', 'accident_type', 'accident_severity', 'number_of_vehicles_involved', 'witnesses', 'police_report_available']
+    features_fraud = [
+'total_claim_amount',
+'injury_claim',
+'property_claim',
+'vehicle_claim',
+'number_of_vehicles_involved',
+'witnesses',
+'police_report_available'
+]
     X_fraud = train_df[features_fraud]
     y_fraud = train_df['fraud_reported']
     

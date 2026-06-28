@@ -61,6 +61,17 @@ df = load_data()
 
 if df is not None:
 
+    # 1. Drop the problematic empty column
+    if '_c39' in df.columns:
+        df = df.drop('_c39', axis=1)
+        
+    # 2. Handle missing values (example for one column, apply as needed)
+    if 'authorities_contacted' in df.columns:
+        df['authorities_contacted'] = df['authorities_contacted'].fillna(df['authorities_contacted'].mode()[0])
+
+    # 3. Use get_dummies instead of manual LabelEncoding
+    # This automatically handles all categorical columns
+    df_encoded = pd.get_dummies(df, drop_first=True)
     df.columns = df.columns.str.strip()
     # Sidebar: Model Settings & Dataset Information
     st.sidebar.header("📊 Model Configuration")

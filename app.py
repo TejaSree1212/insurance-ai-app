@@ -60,6 +60,8 @@ def load_data():
 df = load_data()
 
 if df is not None:
+
+    df.columns = df.columns.str.strip()
     # Sidebar: Model Settings & Dataset Information
     st.sidebar.header("📊 Model Configuration")
     

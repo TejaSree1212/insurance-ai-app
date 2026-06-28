@@ -101,7 +101,7 @@ if df is not None:
     # Map target columns
     train_df['fraud_reported'] = train_df['fraud_reported'].map({'Yes': 1, 'No': 0}).fillna(0).astype(int)
 
-    # 1. Claim Prediction Model (Target: claim_made)
+    # Claim/Fraud Risk Prediction Model
     # Features: age, months_as_customer, policy_type, policy_annual_premium, previous_claims, vehicle_type, vehicle_age
     features_claim = [
 'age',
@@ -112,7 +112,7 @@ if df is not None:
 'capital-loss'
 ]
     X_claim = train_df[features_claim]
-    y_claim = train_df['claim_made']
+    y_claim = train_df['fraud_reported']
     
     X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(X_claim, y_claim, test_size=0.25, random_state=42)
     model_claim = RandomForestClassifier(n_estimators=100, random_state=42)

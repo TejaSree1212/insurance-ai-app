@@ -83,7 +83,7 @@ if df is not None:
     'insured_occupation', 'insured_hobbies', 'insured_relationship', 
     'incident_type', 'collision_type', 'incident_severity', 
     'authorities_contacted', 'police_report_available', 'auto_make', 'auto_model'
-]
+   ]
     
     # 4. Verify columns exist
     missing_cols = [col for col in categorical_cols if col not in df.columns]
@@ -112,7 +112,7 @@ if df is not None:
     features_claim = [
     'age', 'months_as_customer', 'policy_annual_premium', 
     'total_claim_amount', 'number_of_vehicles_involved', 'witnesses'
-]
+    ]
     X_claim = train_df[features_claim]
     y_claim = train_df['claim_made']
     
@@ -126,7 +126,7 @@ if df is not None:
     features_fraud = [
     'total_claim_amount', 'number_of_vehicles_involved', 'witnesses', 
     'incident_severity', 'police_report_available'
-]
+    ]
     X_fraud = train_df[features_fraud]
     y_fraud = train_df['fraud_reported']
     

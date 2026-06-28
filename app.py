@@ -121,7 +121,7 @@ if df is not None:
 
     # 2. Fraud Detection Model (Target: fraud_reported)
     # Features: total_claim_amount, previous_claims, accident_type, accident_severity, number_of_vehicles_involved, witnesses, police_report_available
-    features_fraud = [
+   features_fraud = [
 'total_claim_amount',
 'injury_claim',
 'property_claim',
@@ -242,8 +242,11 @@ annual_prem,
 
         with col2:
             st.subheader("💥 Incident Circumstances")
-            acc_type = st.selectbox("Incident Collision Type", df['accident_type'].unique())
-            acc_sev = st.selectbox("Accident Severity", df['accident_severity'].unique())
+            acc_type = st.selectbox(
+    "Incident Type",
+    df['incident_type'].unique()
+)
+            acc_sev = st.selectbox("Accident Severity", df['incident_severity'].unique())
             num_vehicles = st.slider("Number of Vehicles Involved", 0, 10, 2)
             witness_count = st.slider("Number of Documented Witnesses", 0, 5, 1)
 
@@ -251,8 +254,8 @@ annual_prem,
         
         if st.button("Evaluate Claim Legitimacy", key="predict_fraud_btn"):
             # Map selected categories to encodings
-            acc_type_enc = encoders['accident_type'].transform([acc_type])[0] if acc_type in encoders['accident_type'].classes_ else 0
-            acc_sev_enc = encoders['accident_severity'].transform([acc_sev])[0] if acc_sev in encoders['accident_severity'].classes_ else 0
+            acc_type_enc = encoders['incident_type].transform([acc_type])[0] if acc_type in encoders['accident_type'].classes_ else 0
+            acc_sev_enc = encoders['incident_severity'].transform([acc_sev])[0] if acc_sev in encoders['accident_severity'].classes_ else 0
             police_rep_enc = encoders['police_report_available'].transform([police_rep])[0] if police_rep in encoders['police_report_available'].classes_ else 0
             
             # Form features array

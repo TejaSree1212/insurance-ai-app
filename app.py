@@ -61,15 +61,6 @@ def load_data():
         return None
 
 # Load Dataset
-@st.cache_data
-def load_data():
-    try:
-        df = pd.read_csv("insurance_claims.csv")
-        return df
-    except FileNotFoundError:
-        st.error("Error: 'insurance_claims.csv' not found.")
-        return None
-
 df = load_data()
 
 if df is not None:
@@ -81,12 +72,22 @@ if df is not None:
         df = df.drop('_c39', axis=1)
     
     # 3. Define Categorical Columns
-   categorical_cols = [
-    'policy_state', 'policy_csl', 'insured_sex', 'insured_education_level', 
-    'insured_occupation', 'insured_hobbies', 'insured_relationship', 
-    'incident_type', 'collision_type', 'incident_severity', 
-    'authorities_contacted', 'police_report_available', 'auto_make', 'auto_model'
-   ]
+    categorical_cols = [
+        'policy_state', 
+        'policy_csl', 
+        'insured_sex',
+        'insured_education_level',
+        'insured_occupation',
+        'insured_hobbies',
+        'insured_relationship',
+        'incident_type',
+        'collision_type',
+        'incident_severity',
+        'authorities_contacted',
+        'police_report_available',
+        'auto_make',
+        'auto_model'
+    ]
     
     # 4. Verify columns exist
     missing_cols = [col for col in categorical_cols if col not in df.columns]

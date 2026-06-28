@@ -57,45 +57,50 @@ def load_data():
         st.error("Error: 'insurance_claims.csv' not found. Please place it in the same directory as this script.")
         return None
 
+# Load Dataset
+@st.cache_data
+def load_data():
+    try:
+        df = pd.read_csv("insurance_claims.csv")
+        return df
+    except FileNotFoundError:
+        st.error("Error: 'insurance_claims.csv' not found.")
+        return None
+
 df = load_data()
 
 if df is not None:
-
-    # 1. Drop the problematic empty column
+    # 1. Standardize column names (Crucial step)
+    df.columns = df.columns.str.strip().str.lower()
+    
+    # 2. Drop the problematic empty column
     if '_c39' in df.columns:
         df = df.drop('_c39', axis=1)
-        
-    # 2. Handle missing values (example for one column, apply as needed)
-    if 'authorities_contacted' in df.columns:
-        df['authorities_contacted'] = df['authorities_contacted'].fillna(df['authorities_contacted'].mode()[0])
-
-    # 3. Use get_dummies instead of manual LabelEncoding
-    # This automatically handles all categorical columns
-    df_encoded = pd.get_dummies(df, drop_first=True)
-    df.columns = df.columns.str.strip()
-    # Sidebar: Model Settings & Dataset Information
-    st.sidebar.header("📊 Model Configuration")
     
-    # Dataset preview in sidebar
-    if st.sidebar.checkbox("Show Dataset Sample", value=False):
-        st.sidebar.dataframe(df.head(5))
-    
-    # Preprocessing and Training Models
-    # Let's write helper encoders to transform categoricals safely
-    encoders = {}
+    # 3. Define Categorical Columns
     categorical_cols = ['policy_type', 'vehicle_type', 'accident_type', 'accident_severity', 'police_report_available']
     
-    # Make a copy for training
+    # 4. Verify columns exist
+    missing_cols = [col for col in categorical_cols if col not in df.columns]
+    if missing_cols:
+        st.error(f"Missing expected columns in CSV: {missing_cols}")
+        st.write("Columns found in CSV:", df.columns.tolist())
+        st.stop()
+    
+    # 5. Initialize encoders and training dataframe
+    encoders = {}
     train_df = df.copy()
     
-    # Encode categories
+    # 6. Encode categories
     for col in categorical_cols:
         le = LabelEncoder()
         train_df[col] = le.fit_transform(train_df[col].astype(str))
         encoders[col] = le
         
-    # Map target columns
+    # 7. Map target columns
     train_df['fraud_reported'] = train_df['fraud_reported'].map({'Yes': 1, 'No': 0}).fillna(0).astype(int)
+
+    # --- CONTINUE WITH YOUR MODEL TRAINING LOGIC HERE ---
 
     # 1. Claim Prediction Model (Target: claim_made)
     # Features: age, months_as_customer, policy_type, policy_annual_premium, previous_claims, vehicle_type, vehicle_age

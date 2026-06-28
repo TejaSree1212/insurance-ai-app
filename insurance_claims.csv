@@ -1,0 +1,21 @@
+age,months_as_customer,policy_type,policy_annual_premium,previous_claims,vehicle_type,vehicle_age,accident_type,accident_severity,number_of_vehicles_involved,witnesses,police_report_available,total_claim_amount,claim_made,fraud_reported
+32,120,Gold,1250.50,0,Sedan,3,Rear-end,Minor,2,1,Yes,4500,1,No
+45,240,Platinum,1450.00,1,SUV,5,Single Vehicle,Major,1,2,Yes,18500,1,Yes
+23,12,Silver,950.00,0,Sedan,1,Multi-car,Major,3,0,No,22000,1,No
+54,310,Gold,1600.25,2,Hatchback,8,Rear-end,Minor,2,3,Yes,3200,1,No
+38,95,Silver,1100.00,1,SUV,4,Single Vehicle,Major,1,1,No,12500,1,Yes
+61,400,Platinum,1800.00,0,Sedan,10,None,None,0,0,No,0,0,No
+29,36,Silver,1050.75,0,Sedan,2,Rear-end,Minor,2,1,Yes,2800,1,No
+34,72,Gold,1300.00,0,SUV,6,Multi-car,Minor,4,2,Yes,6500,1,No
+41,180,Platinum,1550.00,3,Sedan,7,Single Vehicle,Major,1,1,No,29000,1,Yes
+50,220,Gold,1400.50,1,SUV,5,Rear-end,Minor,2,2,Yes,5200,1,No
+26,48,Silver,980.00,0,Hatchback,3,None,None,0,0,No,0,0,No
+47,150,Platinum,1380.00,1,Sedan,4,Single Vehicle,Minor,1,0,Yes,8900,1,No
+35,110,Gold,1280.00,2,SUV,6,Multi-car,Major,3,2,Yes,15400,1,No
+58,340,Platinum,1750.00,0,Sedan,9,Rear-end,Minor,2,1,Yes,4100,1,No
+31,85,Silver,1120.00,1,Hatchback,5,Multi-car,Major,3,3,No,32000,1,Yes
+44,200,Gold,1350.00,0,SUV,3,None,None,0,0,No,0,0,No
+22,8,Silver,920.00,2,Sedan,2,Single Vehicle,Major,1,1,No,14500,1,Yes
+37,130,Platinum,1500.00,0,SUV,4,Rear-end,Minor,2,2,Yes,3800,1,No
+52,280,Gold,1580.00,1,Sedan,7,Multi-car,Major,3,1,Yes,24000,1,No
+28,40,Silver,1020.00,0,Hatchback,1,Rear-end,Minor,2,0,No,1900,1,No

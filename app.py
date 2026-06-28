@@ -158,13 +158,19 @@ if df is not None:
             st.subheader("👤 Customer Demographic & Policy")
             age = st.slider("Age of Insured", 18, 100, 35)
             months_cust = st.number_input("Months as Customer", min_value=0, max_value=600, value=120)
-            policy_t = st.selectbox("Policy Coverage Type", df['policy_type'].unique())
+            policy_t = st.selectbox(
+    "Policy State",
+    df['policy_state'].unique()
+)
             annual_prem = st.number_input("Annual Premium Amount ($)", min_value=100.0, max_value=10000.0, value=1250.0)
             prev_claims = st.slider("Number of Previous Claims", 0, 10, 1)
 
         with col2:
             st.subheader("🚗 Vehicle & Accident Spec")
-            vehicle_t = st.selectbox("Vehicle Classification", df['vehicle_type'].unique())
+            vehicle_t = st.selectbox(
+    "Vehicle Make",
+    df['auto_make'].unique()
+)
             vehicle_age = st.slider("Vehicle Age (Years)", 0, 30, 4)
             
             st.info("💡 Adjust demographic values and previous claims to see how actuarial risk adjusts in real-time.")
@@ -178,7 +184,13 @@ if df is not None:
             v_type_enc = encoders['vehicle_type'].transform([vehicle_t])[0] if vehicle_t in encoders['vehicle_type'].classes_ else 0
             
             # Form features array
-            input_data = np.array([[age, months_cust, p_type_enc, annual_prem, prev_claims, v_type_enc, vehicle_age]])
+            input_data = np.array([
+[
+age,
+months_cust,
+annual_prem,
+]
+])
             
             # Predict
             prob = model_claim.predict_proba(input_data)[0][1] # Probability of claim_made=1

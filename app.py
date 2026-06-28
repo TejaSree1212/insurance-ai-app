@@ -66,7 +66,7 @@ df = load_data()
 if df is not None:
     # 1. Standardize column names (Crucial step)
     df.columns = df.columns.str.strip().str.lower()
-    
+    st.write("Available columns:", df.columns.tolist())
     # 2. Drop the problematic empty column
     if '_c39' in df.columns:
         df = df.drop('_c39', axis=1)

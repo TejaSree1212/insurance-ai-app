@@ -118,7 +118,7 @@ if df is not None:
     'total_claim_amount', 'number_of_vehicles_involved', 'witnesses'
     ]
     X_claim = train_df[features_claim]
-    y_claim = train_df['fraud_reported'']
+    y_claim = train_df['fraud_reported']
     
     X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(X_claim, y_claim, test_size=0.25, random_state=42)
     model_claim = RandomForestClassifier(n_estimators=100, random_state=42)

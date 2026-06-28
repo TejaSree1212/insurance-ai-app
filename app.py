@@ -46,7 +46,10 @@ It utilizes **Random Forest Classifiers** to perform:
 1. **Claim Likelihood Prediction** — Assessing if a policyholder is likely to file a claim.
 2. **Fraud Detection Analysis** — Evaluating active claims for indicators of fraudulent behavior.
 """)
-
+if st.button("Clear Cache"):
+    st.cache_data.clear()
+    st.success("Cache cleared! Reloading...")
+    st.rerun()
 # Load Dataset
 @st.cache_data
 def load_data():

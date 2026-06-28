@@ -122,14 +122,14 @@ if df is not None:
     # 2. Fraud Detection Model (Target: fraud_reported)
     # Features: total_claim_amount, previous_claims, accident_type, accident_severity, number_of_vehicles_involved, witnesses, police_report_available
    features_fraud = [
-'total_claim_amount',
-'injury_claim',
-'property_claim',
-'vehicle_claim',
-'number_of_vehicles_involved',
-'witnesses',
-'police_report_available'
-]
+    'total_claim_amount',
+    'injury_claim',
+    'property_claim',
+    'vehicle_claim',
+    'number_of_vehicles_involved',
+    'witnesses',
+    'police_report_available'
+   ]
     X_fraud = train_df[features_fraud]
     y_fraud = train_df['fraud_reported']
     
@@ -168,9 +168,9 @@ if df is not None:
         with col2:
             st.subheader("🚗 Vehicle & Accident Spec")
             vehicle_t = st.selectbox(
-    "Vehicle Make",
-    df['auto_make'].unique()
-)
+                         "Vehicle Make",
+                        df['auto_make'].unique()
+            )
             vehicle_age = st.slider("Vehicle Age (Years)", 0, 30, 4)
             
             st.info("💡 Adjust demographic values and previous claims to see how actuarial risk adjusts in real-time.")
@@ -185,14 +185,14 @@ if df is not None:
             
             # Form features array
             input_data = np.array([
-[
-age,
-months_cust,
-annual_prem,
-]
-])
-            
-            # Predict
+                        [
+                            age,
+                            months_cust,
+                            annual_prem,
+                        ]
+                    ])
+                                    
+                                    # Predict
             prob = model_claim.predict_proba(input_data)[0][1] # Probability of claim_made=1
             prediction = model_claim.predict(input_data)[0]
             

@@ -49,12 +49,28 @@ It utilizes **Random Forest Classifiers** to perform:
 
 # Load Dataset
 @st.cache_data
+# Load Dataset
+@st.cache_data
 def load_data():
     try:
         df = pd.read_csv("insurance_claims.csv")
+
+        # Data Cleaning
+        df = df.drop(
+        [
+        "policy_number",
+        "insured_zip",
+        "policy_bind_date",
+        "incident_date",
+        "incident_location"
+        ],
+        axis=1
+        )
+
         return df
+
     except FileNotFoundError:
-        st.error("Error: 'insurance_claims.csv' not found. Please place it in the same directory as this script.")
+        st.error("Error: 'insurance_claims.csv' not found.")
         return None
 
 df = load_data()
